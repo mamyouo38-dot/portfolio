@@ -3,24 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arsène Mamy | Business Development · E-commerce · Commerce</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Arsène Mamy — Édition №01 · Business Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── ROOT ─────────────────────────────────────────────── */
     :root {
-      --gold:      #c8a45e;
-      --gold-lt:   #dfc08a;
-      --gold-dk:   #9e7d3a;
-      --navy:      #05090f;
-      --navy-2:    #080e1a;
-      --navy-3:    #0d1526;
-      --navy-4:    #111e35;
-      --slate-lt:  #e8edf5;
-      --slate-mid: #8b9ab5;
-      --slate-dim: #3d4f6e;
-      --white:     #f8fafc;
-      --serif: 'Playfair Display', Georgia, serif;
-      --sans:  'Outfit', sans-serif;
+      --emerald:        #0a5c47;
+      --emerald-lt:     #1f8d6c;
+      --emerald-glow:   #2dd4a5;
+      --emerald-deep:   #053e2f;
+
+      --gold:           #d4af6a;
+      --gold-lt:        #ecd4a1;
+      --gold-dk:        #a67f3a;
+      --gold-warm:      #c9a558;
+
+      --ink:            #0a0d0c;
+      --ink-2:          #0f1413;
+      --ink-3:          #141b19;
+      --ink-4:          #1a2320;
+      --line:           rgba(212, 175, 106, 0.10);
+      --line-bright:    rgba(212, 175, 106, 0.22);
+
+      --ivory:          #f5f1e8;
+      --ivory-dim:      #c9c4b5;
+      --ivory-mid:      #8b8779;
+      --ivory-low:      #4a4a44;
+
+      --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+      --sans:  'Inter', system-ui, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,677 +40,944 @@
 
     body {
       font-family: var(--sans);
-      background: var(--navy);
-      color: var(--slate-lt);
+      background: var(--ink);
+      color: var(--ivory);
       overflow-x: hidden;
+      font-weight: 300;
+      line-height: 1.6;
     }
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--navy-2); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--emerald-lt), var(--gold-dk));
+      border-radius: 3px;
+    }
+    ::selection { background: var(--gold); color: var(--ink); }
 
-    /* ── TYPOGRAPHY ── */
-    h1,h2,h3,h4 { font-family: var(--serif); }
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; }
     .label {
       font-family: var(--sans);
-      font-size: .65rem; font-weight: 700;
-      letter-spacing: .25em; text-transform: uppercase;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .35em;
+      text-transform: uppercase;
     }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp  { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
-    @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
-    @keyframes pulse   { 0%,100%{ box-shadow:0 0 0 0 rgba(200,164,94,.45); } 50%{ box-shadow:0 0 0 8px rgba(200,164,94,0); } }
-    @keyframes orbit   { 0%{ transform:rotate(0deg) translateX(58px) rotate(0deg); } 100%{ transform:rotate(360deg) translateX(58px) rotate(-360deg); } }
-    @keyframes floatY  { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px);} to { opacity:1; transform:none;} }
+    @keyframes fadeRight { from { opacity:0; transform:translateX(-30px);} to { opacity:1; transform:none;} }
 
-    .reveal       { opacity:0; transform:translateY(30px);   transition:opacity .7s ease, transform .7s ease; }
-    .reveal-left  { opacity:0; transform:translateX(-30px);  transition:opacity .7s ease, transform .7s ease; }
-    .reveal-right { opacity:0; transform:translateX(30px);   transition:opacity .7s ease, transform .7s ease; }
-    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity:1; transform:none; }
+    .reveal { opacity:0; transform:translateY(30px); transition: opacity 1s cubic-bezier(.2,.7,.3,1), transform 1s cubic-bezier(.2,.7,.3,1); }
+    .reveal.visible { opacity:1; transform:none; }
 
-    /* ── NOISE OVERLAY ── */
     .noise::after {
       content:''; position:absolute; inset:0; z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
       pointer-events:none;
     }
 
-    /* ── GOLD LINE DECORATION ── */
-    .gold-line {
-      display:block; width:40px; height:2px;
-      background:linear-gradient(90deg, var(--gold), var(--gold-lt));
-      border-radius:2px; margin-bottom:1.25rem;
+    /* HEADER */
+    .mag-header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(10, 13, 12, .92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      padding: .9rem 0;
     }
+    .mag-header-inner {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 3rem;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; gap: 2rem;
+    }
+    .mag-issue {
+      font-family: var(--serif); font-style: italic;
+      font-size: .9rem; color: var(--gold-lt);
+    }
+    .mag-issue span {
+      font-family: var(--sans); font-style: normal;
+      font-size: .6rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--ivory-low);
+      margin-left: .5rem;
+    }
+    .mag-logo {
+      font-family: var(--serif); font-weight: 600;
+      font-size: 1.1rem; color: var(--ivory);
+      letter-spacing: .12em; text-transform: uppercase;
+      text-align: center;
+    }
+    .mag-logo em { font-style: italic; color: var(--gold-lt); font-weight: 500; }
+    .mag-nav { display: flex; justify-content: flex-end; gap: 2rem; }
+    .mag-nav a {
+      font-size: .62rem; font-weight: 500; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--ivory-mid);
+      text-decoration: none; transition: color .3s; position: relative;
+    }
+    .mag-nav a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:1px; background: var(--gold); transition: width .35s;
+    }
+    .mag-nav a:hover { color: var(--gold-lt); }
+    .mag-nav a:hover::after { width: 100%; }
 
-    /* ══════════════════ HEADER ══════════════════ */
-    header {
-      position:fixed; top:0; left:0; width:100%; z-index:1000;
-      transition:background .4s, backdrop-filter .4s, padding .3s, box-shadow .4s;
-      padding:1.5rem 0;
-    }
-    header.scrolled {
-      background:rgba(5,9,15,.92);
-      backdrop-filter:blur(20px);
-      padding:.875rem 0;
-      box-shadow:0 1px 0 rgba(200,164,94,.1), 0 8px 32px rgba(0,0,0,.4);
-    }
-    .header-inner {
-      max-width:1200px; margin:0 auto; padding:0 2.5rem;
-      display:flex; justify-content:space-between; align-items:center;
-    }
-    .logo-mark { display:flex; flex-direction:column; gap:.1rem; }
-    .logo-name { font-family:var(--serif); font-size:1.05rem; font-weight:700; color:var(--white); letter-spacing:.02em; }
-    .logo-sub  { font-size:.6rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); }
-
-    nav { display:flex; align-items:center; gap:2.5rem; }
-    nav a.nav-link {
-      font-size:.68rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-      color:var(--slate-mid); text-decoration:none; position:relative; transition:color .25s;
-    }
-    nav a.nav-link::after {
-      content:''; position:absolute; bottom:-3px; left:0;
-      width:0; height:1px; background:var(--gold); transition:width .3s ease;
-    }
-    nav a.nav-link:hover { color:var(--gold-lt); }
-    nav a.nav-link:hover::after { width:100%; }
-
-    .nav-icons { display:flex; gap:1.1rem; align-items:center; margin-left:1rem; padding-left:1.75rem; border-left:1px solid rgba(255,255,255,.07); }
-    .nav-icons a { color:var(--slate-dim); transition:color .25s; }
-    .nav-icons a:hover { color:var(--gold-lt); }
-    .nav-icons svg { width:18px; height:18px; }
-
-    /* ══════════════════ HERO ══════════════════ */
+    /* HERO */
     #hero {
-      position:relative; min-height:100svh;
-      display:flex; align-items:center; overflow:hidden;
-      background:var(--navy);
+      position: relative; min-height: 100svh;
+      background: var(--ink); overflow: hidden;
+      padding-top: 4rem;
     }
-    .hero-split {
-      position:absolute; inset:0;
-      clip-path:polygon(58% 0, 100% 0, 100% 100%, 43% 100%);
-      background:linear-gradient(135deg, var(--navy-3) 0%, var(--navy-4) 100%);
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 100% 0%, rgba(45, 212, 165, .08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 0% 100%, rgba(212, 175, 106, .06) 0%, transparent 60%),
+        var(--ink);
     }
-    .hero-split::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse 80% 70% at 70% 40%, rgba(200,164,94,.07) 0%, transparent 70%);
+    .hero-rule-top, .hero-rule-bot {
+      position: absolute; left: 3rem; right: 3rem; height: 1px;
+      background: var(--line-bright);
     }
-    .hero-grid {
-      position:absolute; inset:0; opacity:.025;
-      background-image:linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
-      background-size:64px 64px;
+    .hero-rule-top { top: 6rem; }
+    .hero-rule-bot { bottom: 4rem; }
+    .hero-issue-num {
+      position: absolute; top: 50%; right: -2rem;
+      transform: translateY(-50%);
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(20rem, 40vw, 38rem); font-weight: 400;
+      color: rgba(212, 175, 106, .035);
+      line-height: .8; letter-spacing: -.05em;
+      pointer-events: none; user-select: none; z-index: 0;
+    }
+    .hero-wrap {
+      position: relative; z-index: 2;
+      max-width: 1400px; margin: 0 auto;
+      padding: 7rem 3rem 4rem;
+      min-height: calc(100svh - 4rem);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .hero-left { animation: fadeRight 1.2s ease both .2s; position: relative; }
+    .hero-kicker { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+    .hero-kicker-line {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .hero-kicker-text {
+      font-size: .65rem; font-weight: 600; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hero-feature {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--emerald-glow);
+      margin-bottom: 1rem; letter-spacing: .02em;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(4.5rem, 11vw, 11rem);
+      font-weight: 500; line-height: .82;
+      letter-spacing: -.035em; color: var(--ivory); margin-bottom: 0;
+    }
+    .hero-title .l1 { display: block; }
+    .hero-title .l2 {
+      display: block; font-style: italic; font-weight: 400;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 60%, var(--gold-warm) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; padding-left: 2rem;
+    }
+    .hero-deck {
+      margin-top: 3rem; font-family: var(--serif);
+      font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+      font-style: italic; color: var(--ivory-dim);
+      line-height: 1.55; max-width: 38ch; font-weight: 400;
+    }
+    .hero-deck::before { content: '« '; color: var(--gold); font-size: 1.5em; line-height: 0; }
+    .hero-deck::after  { content: ' »'; color: var(--gold); font-size: 1.5em; line-height: 0; }
+    .hero-byline {
+      margin-top: 2.5rem; display: flex; align-items: center;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .hero-byline-block {
+      font-size: .68rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--ivory-mid); font-weight: 500;
+    }
+    .hero-byline-block strong {
+      display: block; color: var(--gold-lt); font-size: .75rem;
+      margin-bottom: .2rem; font-weight: 600;
+    }
+    .hero-byline-sep { width: 1px; height: 30px; background: var(--line-bright); }
+
+    .hero-right {
+      position: relative; animation: fadeUp 1.2s ease both .45s;
+      height: min(75svh, 720px);
+    }
+    .hero-visual {
+      position: absolute; inset: 0; display: grid;
+      grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; gap: 1rem;
+    }
+    .hero-photo-main {
+      grid-row: 1 / 3; grid-column: 2;
+      background: linear-gradient(135deg, var(--ink-3), var(--emerald-deep));
+      border-radius: 2px; position: relative; overflow: hidden;
+      min-height: 500px; box-shadow: 0 40px 80px rgba(0, 0, 0, .55);
+    }
+    .hero-photo-main::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(212, 175, 106, .12), transparent 60%);
+      z-index: 1;
+    }
+    .hero-photo-main img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: contrast(1.05) saturate(.92);
+    }
+    .hero-photo-main::after {
+      content: ''; position: absolute; top: 18px; left: 18px;
+      width: 40px; height: 40px;
+      border-top: 1.5px solid var(--gold);
+      border-left: 1.5px solid var(--gold);
+      opacity: .8; z-index: 3;
+    }
+    .hero-photo-corner-br {
+      position: absolute; bottom: 18px; right: 18px;
+      width: 40px; height: 40px;
+      border-bottom: 1.5px solid var(--gold);
+      border-right: 1.5px solid var(--gold);
+      opacity: .8; z-index: 3;
+    }
+    .hero-card-stat {
+      grid-column: 1; grid-row: 1;
+      background: var(--ink-3);
+      border: 1px solid var(--line-bright);
+      padding: 1.5rem; display: flex; flex-direction: column;
+      justify-content: space-between; border-radius: 2px; position: relative;
+    }
+    .hero-card-stat .stat-mini-label {
+      font-size: .55rem; font-weight: 600; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hero-card-stat .stat-mini-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 4rem; font-weight: 500;
+      color: var(--ivory); line-height: 1; margin: 1rem 0;
+    }
+    .hero-card-stat .stat-mini-desc {
+      font-size: .72rem; color: var(--ivory-mid); line-height: 1.5;
+    }
+    .hero-card-meta {
+      grid-column: 1; grid-row: 2;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-lt) 100%);
+      padding: 1.4rem; border-radius: 2px; color: var(--ivory); position: relative;
+    }
+    .hero-card-meta-label {
+      font-size: .55rem; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold-lt); margin-bottom: .6rem;
+    }
+    .hero-card-meta-text {
+      font-family: var(--serif); font-size: 1.15rem;
+      font-weight: 500; line-height: 1.25;
+    }
+    .hero-card-meta-text em { font-style: italic; color: var(--gold-lt); }
+    .hero-scroll {
+      position: absolute; left: 3rem; bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem; z-index: 3;
+    }
+    .hero-scroll-line { width: 50px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+    .hero-scroll p {
+      font-size: .55rem; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--gold); opacity: .55;
     }
 
-    .orbital-wrap {
-      position:absolute; right:5%; top:50%; transform:translateY(-50%);
-      width:500px; height:500px; pointer-events:none; opacity:.1;
+    /* SECTIONS */
+    section { position: relative; overflow: hidden; }
+    .section-inner { max-width: 1400px; margin: 0 auto; padding: 8rem 3rem; }
+    .mag-section-header {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 4rem; align-items: end; margin-bottom: 5rem;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--line);
     }
-    .orbital-ring { position:absolute; inset:0; border:1px solid var(--gold); border-radius:50%; }
-    .orbital-ring:nth-child(2) { inset:55px; opacity:.6; }
-    .orbital-ring:nth-child(3) { inset:110px; opacity:.4; }
-    .orbital-dot {
-      position:absolute; top:50%; left:50%;
-      width:6px; height:6px; background:var(--gold);
-      border-radius:50%; margin:-3px;
-      animation:orbit 8s linear infinite;
+    .mag-section-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 6rem; font-weight: 500;
+      color: var(--gold-lt); line-height: .8; opacity: .9;
     }
-    .orbital-dot:nth-child(5) { animation-delay:-3s; animation-duration:13s; }
-
-    .hero-content {
-      position:relative; z-index:2;
-      max-width:1200px; margin:0 auto;
-      padding:8rem 2.5rem 5rem;
-      display:grid; grid-template-columns:auto 1fr;
-      gap:5rem; align-items:center; width:100%;
+    .mag-section-title h2 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 500; line-height: .95;
+      color: var(--ivory); letter-spacing: -.02em; margin-bottom: 1rem;
     }
-    .hero-eyebrow {
-      display:inline-flex; align-items:center; gap:.6rem;
-      font-size:.62rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
-      color:var(--gold); border:1px solid rgba(200,164,94,.2);
-      padding:.45rem 1rem; border-radius:2px; margin-bottom:1.75rem;
-      background:rgba(200,164,94,.04);
-    }
-    .hero-eyebrow .dot {
-      width:5px; height:5px; border-radius:50%;
-      background:var(--gold); animation:pulse 2.2s infinite;
-    }
-    .hero-h1 {
-      font-family:var(--serif);
-      font-size:clamp(3.2rem,7.5vw,6.2rem);
-      font-weight:900; line-height:.9; letter-spacing:-.01em;
-      color:var(--white); margin-bottom:1.5rem;
-    }
-    .hero-h1 em {
-      font-style:italic;
-      background:linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .hero-sub   { font-size:1.05rem; font-weight:300; color:var(--slate-mid); line-height:1.7; max-width:44ch; margin-bottom:.6rem; }
-    .hero-sub strong { color:var(--slate-lt); font-weight:500; }
-    .hero-tagline { font-size:.78rem; color:var(--slate-dim); letter-spacing:.06em; margin-bottom:2.5rem; }
-
-    .hero-stats { display:flex; gap:2rem; margin-bottom:2.75rem; flex-wrap:wrap; }
-    .stat-item  { border-left:1px solid var(--slate-dim); padding-left:1rem; }
-    .stat-num   { font-family:var(--serif); font-size:1.6rem; font-weight:700; color:var(--white); line-height:1; }
-    .stat-lbl   { font-size:.6rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--slate-dim); margin-top:.25rem; }
-
-    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
-
-    .btn-primary {
-      display:inline-flex; align-items:center; gap:.6rem;
-      padding:.9rem 2rem;
-      background:linear-gradient(135deg, var(--gold-dk) 0%, var(--gold) 100%);
-      color:var(--navy); font-weight:700; font-size:.82rem;
-      letter-spacing:.06em; text-transform:uppercase;
-      text-decoration:none; border-radius:2px;
-      box-shadow:0 4px 20px rgba(200,164,94,.3);
-      transition:transform .2s, box-shadow .2s; position:relative; overflow:hidden;
-    }
-    .btn-primary::before {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
-      transform:translateX(-100%); transition:transform .45s;
-    }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(200,164,94,.4); }
-    .btn-primary:hover::before { transform:translateX(100%); }
-
-    .btn-ghost {
-      display:inline-flex; align-items:center; gap:.6rem;
-      padding:.9rem 2rem; border:1px solid rgba(255,255,255,.1);
-      color:var(--slate-mid); font-weight:600; font-size:.82rem;
-      letter-spacing:.06em; text-transform:uppercase;
-      text-decoration:none; border-radius:2px;
-      transition:border-color .25s, color .25s, background .25s;
-    }
-    .btn-ghost:hover { border-color:rgba(200,164,94,.4); color:var(--gold-lt); background:rgba(200,164,94,.04); }
-
-    /* Photo */
-    .photo-card { position:relative; width:300px; flex-shrink:0; animation:floatY 6s ease-in-out infinite; }
-    .photo-frame { position:relative; width:100%; aspect-ratio:3/4; border-radius:4px; overflow:hidden; }
-    .photo-frame img { width:100%; height:100%; object-fit:cover; display:block; }
-    .photo-frame::before, .photo-frame::after {
-      content:''; position:absolute; z-index:2;
-      width:28px; height:28px; border-color:var(--gold); border-style:solid; opacity:.7;
-    }
-    .photo-frame::before { top:12px; left:12px; border-width:2px 0 0 2px; }
-    .photo-frame::after  { bottom:12px; right:12px; border-width:0 2px 2px 0; }
-
-    /* Photo placeholder quand pas d'image */
-    .photo-placeholder {
-      width:100%; height:100%;
-      background:linear-gradient(135deg, var(--navy-3), var(--navy-4));
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.75rem;
-    }
-    .photo-placeholder .initials {
-      font-family:var(--serif); font-size:4rem; font-weight:900;
-      background:linear-gradient(135deg, var(--gold-dk), var(--gold-lt));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      line-height:1;
-    }
-    .photo-placeholder .ph-label {
-      font-size:.6rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--slate-dim);
+    .mag-section-title h2 em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .mag-section-title .label { color: var(--gold); margin-bottom: 1rem; }
+    .mag-section-title .deck {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.15rem; color: var(--ivory-mid);
+      margin-top: .5rem; max-width: 50ch;
     }
 
-    .photo-stripe {
-      position:absolute; top:16px; right:-16px;
-      width:100%; height:100%;
-      border:1px solid rgba(200,164,94,.15); border-radius:4px; z-index:-1;
+    /* ABOUT */
+    #about { background: var(--ink-2); }
+    .about-wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; }
+    .about-lead {
+      font-family: var(--serif); font-size: 1.65rem; font-weight: 400;
+      line-height: 1.4; color: var(--ivory); margin-bottom: 2rem;
+      letter-spacing: -.005em;
     }
-    .photo-badge {
-      position:absolute; bottom:-1rem; left:-1rem;
-      background:linear-gradient(135deg, var(--gold-dk), var(--gold));
-      color:var(--navy); padding:.7rem 1.1rem; border-radius:2px;
-      font-size:.68rem; font-weight:700; line-height:1.4;
-      box-shadow:0 8px 24px rgba(0,0,0,.4); z-index:3;
+    .about-lead::first-letter {
+      font-family: var(--serif); font-style: italic;
+      font-size: 4.5rem; font-weight: 500; color: var(--gold-lt);
+      float: left; line-height: .85; margin: .35rem .75rem 0 0;
     }
-    .photo-badge span { opacity:.7; font-weight:400; display:block; }
-
-    .scroll-hint {
-      position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
-      display:flex; flex-direction:column; align-items:center; gap:.5rem;
-      opacity:.35;
+    .about-body p {
+      font-size: 1rem; color: var(--ivory-dim);
+      line-height: 1.85; margin-bottom: 1.25rem;
     }
-    .scroll-hint .line { width:1px; height:40px; background:linear-gradient(to bottom, var(--gold), transparent); }
-    .scroll-hint p { font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
-
-    /* ══════════════════ SECTION BASE ══════════════════ */
-    section { position:relative; overflow:hidden; }
-    .section-inner { max-width:1200px; margin:0 auto; padding:6.5rem 2.5rem; }
-    .section-header { margin-bottom:4rem; }
-    .section-header .label { color:var(--gold); margin-bottom:.75rem; }
-    .section-header h2 { font-size:clamp(1.8rem,3.5vw,2.75rem); font-weight:700; color:var(--white); line-height:1.1; }
-
-    /* ══════════════════ ABOUT ══════════════════ */
-    #about { background:var(--navy-2); }
-    #about::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg, transparent, var(--gold-dk), transparent);
+    .about-body p strong { color: var(--ivory); font-weight: 500; }
+    .about-pullquote {
+      grid-column: 1 / -1; max-width: 60ch; margin: 3rem auto 0;
+      text-align: center; padding: 2.5rem 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
     }
-    .about-grid { display:grid; grid-template-columns:1fr 340px; gap:5rem; align-items:start; }
-    .about-text p { font-size:1rem; font-weight:300; color:var(--slate-mid); line-height:1.85; margin-bottom:1.25rem; }
-    .about-text p strong { color:var(--white); font-weight:600; }
-    .about-text .quote {
-      border-left:2px solid var(--gold); padding-left:1.25rem; margin-top:1.75rem;
-      font-style:italic; color:var(--slate-dim); font-size:.92rem;
+    .about-pullquote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.8rem; font-weight: 400; color: var(--gold-lt); line-height: 1.4;
+    }
+    .about-pullquote .attr {
+      font-family: var(--sans); font-style: normal;
+      font-size: .65rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--ivory-low);
+      margin-top: 1.25rem; display: block;
+    }
+    .about-sidebar {
+      background: var(--ink-3); border: 1px solid var(--line);
+      padding: 2.5rem 2rem; border-radius: 2px;
+      position: sticky; top: 6rem; align-self: start;
+    }
+    .about-sidebar::before {
+      content: ''; display: block; width: 40px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--emerald-glow));
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-title {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 500;
+      color: var(--ivory); margin-bottom: 1.75rem;
+    }
+    .sidebar-block { margin-bottom: 1.5rem; }
+    .sidebar-block:last-child { margin-bottom: 0; }
+    .sidebar-block-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .85rem; padding-bottom: .5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .tag-group { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .tag { display: inline-block; padding: .3rem .8rem; font-size: .65rem; font-weight: 500; border-radius: 1px; }
+    .tag-gold {
+      background: rgba(212, 175, 106, .07); color: var(--gold-lt);
+      border: 1px solid rgba(212, 175, 106, .2);
+    }
+    .tag-emerald {
+      background: rgba(45, 212, 165, .06); color: var(--emerald-glow);
+      border: 1px solid rgba(45, 212, 165, .18);
+    }
+    .lang-row {
+      display: flex; justify-content: space-between;
+      padding: .55rem 0; border-bottom: 1px solid var(--line);
+    }
+    .lang-row:last-child { border-bottom: none; }
+    .lang-name { font-size: .85rem; color: var(--ivory); }
+    .lang-level {
+      font-size: .6rem; font-weight: 600; letter-spacing: .18em;
+      color: var(--gold); text-transform: uppercase;
     }
 
-    .skills-panel {
-      background:var(--navy-3); border:1px solid rgba(255,255,255,.05);
-      border-radius:4px; padding:2rem; position:sticky; top:6rem;
+    /* PROJETS */
+    #projets { background: var(--ink); }
+    .projects-edit { display: flex; flex-direction: column; gap: 0; }
+    .proj-row {
+      display: grid; grid-template-columns: 80px 1fr 1.3fr;
+      gap: 3rem; padding: 3rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start; transition: background .4s;
     }
-    .skills-group { margin-bottom:2rem; }
-    .skills-group:last-child { margin-bottom:0; }
-    .skills-group-label {
-      font-size:.6rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:.9rem; padding-bottom:.5rem;
-      border-bottom:1px solid rgba(200,164,94,.12);
+    .proj-row:hover { background: rgba(212, 175, 106, .015); }
+    .proj-row:last-child { border-bottom: none; }
+    .proj-row.alt { grid-template-columns: 80px 1.3fr 1fr; }
+    .proj-row.alt .proj-meta-col { order: 3; }
+    .proj-row.alt .proj-content-col { order: 2; }
+    .proj-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 4rem; font-weight: 500;
+      color: var(--gold-lt); line-height: .85;
     }
-    .tag-group { display:flex; flex-wrap:wrap; gap:.45rem; }
-    .tag { display:inline-block; padding:.3rem .8rem; font-size:.68rem; font-weight:600; letter-spacing:.04em; border-radius:2px; }
-    .tag-finance { background:rgba(200,164,94,.08); color:var(--gold-lt); border:1px solid rgba(200,164,94,.18); }
-    .tag-tech    { background:rgba(96,165,250,.08);  color:#93c5fd;       border:1px solid rgba(96,165,250,.18); }
-    .tag-other   { background:rgba(167,243,208,.07); color:#6ee7b7;       border:1px solid rgba(167,243,208,.15); }
-
-    .lang-row { display:flex; justify-content:space-between; align-items:center; padding:.55rem 0; border-bottom:1px solid rgba(255,255,255,.04); }
-    .lang-row:last-child { border-bottom:none; }
-    .lang-name  { font-size:.85rem; font-weight:500; color:var(--slate-lt); }
-    .lang-level { font-size:.65rem; font-weight:600; letter-spacing:.08em; color:var(--gold); text-transform:uppercase; }
-
-    /* ══════════════════ PROJECTS ══════════════════ */
-    #projets { background:var(--navy); }
-    #projets::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg, transparent, var(--gold-dk), transparent);
+    .proj-meta-col { padding-top: .75rem; }
+    .proj-cat {
+      display: inline-block; font-size: .58rem; font-weight: 600;
+      letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
+      padding: .35rem .85rem; border: 1px solid var(--line-bright);
+      border-radius: 1px; margin-bottom: 1rem;
+      background: rgba(212, 175, 106, .04);
     }
-    .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
-
-    .proj-card {
-      background:var(--navy-3); border:1px solid rgba(255,255,255,.05); border-radius:4px;
-      padding:2.25rem; display:flex; flex-direction:column;
-      transition:transform .3s, border-color .3s, box-shadow .3s; position:relative; overflow:hidden;
+    .proj-date {
+      font-family: var(--serif); font-style: italic;
+      font-size: .95rem; color: var(--ivory-mid); margin-bottom: 1rem;
     }
-    .proj-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background:linear-gradient(90deg, var(--gold-dk), var(--gold-lt));
-      transform:scaleX(0); transform-origin:left; transition:transform .4s ease;
+    .proj-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.25rem; }
+    .proj-tag {
+      font-size: .65rem; font-weight: 500; color: var(--ivory-mid);
+      padding: .25rem .7rem; background: rgba(245, 241, 232, .04);
+      border: 1px solid var(--line); border-radius: 1px;
     }
-    .proj-card:hover::before { transform:scaleX(1); }
-    .proj-card:hover { transform:translateY(-6px); border-color:rgba(200,164,94,.2); box-shadow:0 24px 60px rgba(0,0,0,.4); }
-
-    .proj-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; }
-    .proj-number { font-family:var(--serif); font-size:3rem; font-weight:900; line-height:1; color:rgba(255,255,255,.05); }
-    .proj-badge  { font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:.3rem .75rem; border-radius:2px; }
-    .badge-blue  { background:rgba(96,165,250,.1);  color:#93c5fd; border:1px solid rgba(96,165,250,.2); }
-    .badge-green { background:rgba(52,211,153,.1);  color:#6ee7b7; border:1px solid rgba(52,211,153,.2); }
-    .badge-violet{ background:rgba(167,139,250,.1); color:#c4b5fd; border:1px solid rgba(167,139,250,.2); }
-
-    .proj-title { font-size:1.02rem; font-weight:600; color:var(--white); line-height:1.35; margin-bottom:.85rem; transition:color .25s; }
-    .proj-card:hover .proj-title { color:var(--gold-lt); }
-    .proj-desc  { font-size:.82rem; font-weight:300; color:var(--slate-mid); line-height:1.75; flex:1; margin-bottom:1.5rem; }
-    .proj-tags  { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.75rem; }
-    .proj-link  {
-      display:inline-flex; align-items:center; gap:.4rem;
-      font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-      color:var(--gold); text-decoration:none; transition:gap .25s, color .25s; margin-top:auto;
+    .proj-content-col { padding-top: .25rem; }
+    .proj-title {
+      font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 500; color: var(--ivory); line-height: 1.15;
+      margin-bottom: 1.25rem; letter-spacing: -.005em; transition: color .35s;
     }
-    .proj-link:hover { gap:.75rem; color:var(--gold-lt); }
-
-    /* ══════════════════ EXPERIENCE ══════════════════ */
-    #experience { background:var(--navy-2); }
-    #experience::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg, transparent, var(--gold-dk), transparent);
+    .proj-row:hover .proj-title { color: var(--gold-lt); }
+    .proj-title em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .proj-desc {
+      font-size: .95rem; color: var(--ivory-dim);
+      line-height: 1.8; font-weight: 300;
     }
-    .exp-timeline { display:flex; flex-direction:column; }
-    .exp-item { display:grid; grid-template-columns:180px 1px 1fr; gap:0 2.5rem; }
+    .proj-desc strong { color: var(--gold-lt); font-weight: 500; }
 
-    .exp-date-col { padding-top:.25rem; text-align:right; }
-    .exp-period  { font-size:.68rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); line-height:1.4; }
-    .exp-location{ font-size:.65rem; color:var(--slate-dim); margin-top:.3rem; }
-
-    .exp-line-col { display:flex; flex-direction:column; align-items:center; }
-    .exp-dot { width:10px; height:10px; background:var(--gold); border-radius:50%; border:2px solid var(--navy-2); box-shadow:0 0 0 3px rgba(200,164,94,.25); flex-shrink:0; margin-top:.15rem; }
-    .exp-vert { flex:1; width:1px; background:linear-gradient(to bottom, rgba(200,164,94,.3), transparent); margin-top:.5rem; min-height:3rem; }
-
-    .exp-body { padding-bottom:3.5rem; }
-    .exp-item:last-child .exp-body { padding-bottom:0; }
-    .exp-item:last-child .exp-vert { display:none; }
-    .exp-role    { font-size:1.15rem; font-weight:700; color:var(--white); line-height:1.2; margin-bottom:.25rem; }
-    .exp-company { font-size:.8rem; font-weight:600; color:var(--gold-lt); letter-spacing:.04em; margin-bottom:1.1rem; }
-
-    .exp-card-inner {
-      background:var(--navy-3); border:1px solid rgba(255,255,255,.05); border-radius:4px;
-      padding:1.5rem 1.75rem; transition:border-color .3s;
+    /* EXPÉRIENCE */
+    #experience { background: var(--ink-2); }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-block {
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 4rem; padding: 3.5rem 0;
+      border-bottom: 1px solid var(--line); align-items: start;
     }
-    .exp-card-inner:hover { border-color:rgba(200,164,94,.18); }
-
-    .exp-ul { list-style:none; display:flex; flex-direction:column; gap:.75rem; }
-    .exp-ul li { font-size:.85rem; font-weight:300; color:var(--slate-mid); line-height:1.65; padding-left:1.1rem; position:relative; }
-    .exp-ul li::before { content:'›'; position:absolute; left:0; color:var(--gold); font-size:1rem; }
-
-    /* ══════════════════ FORMATION ══════════════════ */
-    #formation { background:var(--navy); }
-    #formation::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg, transparent, var(--gold-dk), transparent);
+    .exp-block:last-child { border-bottom: none; }
+    .exp-meta { position: relative; padding-left: 1.5rem; }
+    .exp-meta::before {
+      content: ''; position: absolute; left: 0; top: .6rem;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 0 3px rgba(212, 175, 106, .2);
     }
-    .edu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+    .exp-period {
+      font-size: .65rem; font-weight: 600; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--gold);
+      line-height: 1.4; margin-bottom: .5rem;
+    }
+    .exp-location {
+      font-family: var(--serif); font-style: italic;
+      font-size: .95rem; color: var(--ivory-mid);
+    }
+    .exp-content { padding-top: .25rem; }
+    .exp-role {
+      font-family: var(--serif); font-size: 1.85rem; font-weight: 500;
+      color: var(--ivory); line-height: 1.2;
+      margin-bottom: .35rem; letter-spacing: -.005em;
+    }
+    .exp-role em { font-style: italic; color: var(--gold-lt); }
+    .exp-company {
+      font-size: .8rem; font-weight: 500; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--emerald-glow); margin-bottom: 1.5rem;
+    }
+    .exp-points {
+      list-style: none; display: flex; flex-direction: column;
+      gap: .85rem; max-width: 70ch;
+    }
+    .exp-points li {
+      font-size: .92rem; color: var(--ivory-dim); line-height: 1.7;
+      padding-left: 1.5rem; position: relative; font-weight: 300;
+    }
+    .exp-points li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold); font-weight: 400;
+    }
+
+    /* FORMATION */
+    #formation { background: var(--ink); }
+    .edu-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border-top: 1px solid var(--line);
+    }
     .edu-card {
-      background:var(--navy-3); border:1px solid rgba(255,255,255,.05); border-radius:4px;
-      padding:2rem; position:relative; overflow:hidden;
-      transition:transform .3s, border-color .3s, box-shadow .3s;
+      padding: 3.5rem 3rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      position: relative; transition: background .4s;
     }
-    .edu-card::after {
-      content:attr(data-num); position:absolute; bottom:-.5rem; right:1rem;
-      font-family:var(--serif); font-size:5rem; font-weight:900;
-      color:rgba(200,164,94,.04); line-height:1; pointer-events:none;
+    .edu-card:nth-child(2n) { border-right: none; }
+    .edu-card:hover { background: rgba(212, 175, 106, .02); }
+    .edu-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 2.5rem; font-weight: 500;
+      color: var(--gold-lt); opacity: .5;
+      margin-bottom: 1.5rem; line-height: 1;
     }
-    .edu-card:hover { transform:translateY(-4px); border-color:rgba(200,164,94,.18); box-shadow:0 16px 48px rgba(0,0,0,.35); }
-
-    .edu-year   { display:inline-block; font-size:.6rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); background:rgba(200,164,94,.08); border:1px solid rgba(200,164,94,.15); padding:.25rem .75rem; border-radius:2px; margin-bottom:1.1rem; }
-    .edu-degree { font-size:1rem; font-weight:700; color:var(--white); line-height:1.3; margin-bottom:.4rem; }
-    .edu-school { font-size:.8rem; font-weight:600; color:var(--gold-lt); margin-bottom:.9rem; }
-    .edu-desc   { font-size:.78rem; font-weight:300; color:var(--slate-mid); line-height:1.65; }
-    .edu-mention{ display:inline-block; margin-top:.6rem; font-size:.62rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#6ee7b7; background:rgba(52,211,153,.08); border:1px solid rgba(52,211,153,.18); padding:.2rem .65rem; border-radius:2px; }
-
-    /* ══════════════════ SKILLS & CERTIF ══════════════════ */
-    #competences { background:var(--navy-2); }
-    #competences::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg, transparent, var(--gold-dk), transparent);
+    .edu-year {
+      font-size: .6rem; font-weight: 600; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
     }
-    .comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
-
-    .soft-grid { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
-    .soft-item {
-      background:var(--navy-3); border:1px solid rgba(255,255,255,.05); border-radius:4px;
-      padding:1rem 1.1rem; display:flex; align-items:center; gap:.75rem; transition:border-color .25s;
+    .edu-degree {
+      font-family: var(--serif); font-size: 1.85rem; font-weight: 500;
+      color: var(--ivory); line-height: 1.2;
+      margin-bottom: .5rem; letter-spacing: -.005em;
     }
-    .soft-item:hover { border-color:rgba(200,164,94,.2); }
-    .soft-icon  { font-size:1.1rem; }
-    .soft-label { font-size:.82rem; font-weight:500; color:var(--slate-lt); }
-
-    .certif-list { display:flex; flex-direction:column; gap:.75rem; }
-    .certif-item {
-      background:var(--navy-3); border:1px solid rgba(255,255,255,.05); border-radius:4px;
-      padding:1.1rem 1.4rem; display:flex; justify-content:space-between; align-items:center; transition:border-color .25s;
+    .edu-school {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--emerald-glow); margin-bottom: 1.5rem;
     }
-    .certif-item a { text-decoration:none; display:flex; justify-content:space-between; align-items:center; width:100%; }
-    .certif-item:hover { border-color:rgba(200,164,94,.2); }
-    .certif-name  { font-size:.88rem; font-weight:600; color:var(--white); }
-    .certif-sub   { font-size:.65rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--slate-dim); margin-top:.2rem; }
-    .certif-arrow { font-size:.75rem; color:var(--gold); opacity:.5; transition:opacity .2s, transform .2s; }
-    .certif-item:hover .certif-arrow { opacity:1; transform:translateX(3px); }
-    .certif-item.highlight { border-color:rgba(200,164,94,.15); background:rgba(200,164,94,.04); }
-    .certif-item.highlight .certif-name { color:var(--gold-lt); }
+    .edu-desc {
+      font-size: .92rem; color: var(--ivory-dim);
+      line-height: 1.75; font-weight: 300; max-width: 50ch;
+    }
 
-    /* ══════════════════ FOOTER ══════════════════ */
-    footer { background:var(--navy); border-top:1px solid rgba(200,164,94,.1); position:relative; overflow:hidden; }
+    /* COMPÉTENCES */
+    #competences { background: var(--ink-2); }
+    .comp-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border-top: 1px solid var(--line);
+    }
+    .comp-col {
+      padding: 2.5rem 1.75rem;
+      border-right: 1px solid var(--line);
+      transition: background .4s;
+    }
+    .comp-col:last-child { border-right: none; }
+    .comp-col:hover { background: rgba(212, 175, 106, .02); }
+    .comp-col-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--gold-lt); opacity: .55;
+      margin-bottom: .75rem; line-height: 1;
+    }
+    .comp-col-title {
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 500;
+      color: var(--ivory); margin-bottom: 1.25rem;
+      padding-bottom: .85rem; border-bottom: 1px solid var(--line);
+      letter-spacing: -.005em;
+    }
+    .comp-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    .comp-list li {
+      font-size: .85rem; color: var(--ivory-dim); font-weight: 300;
+      line-height: 1.5; padding-left: 1rem; position: relative;
+    }
+    .comp-list li::before {
+      content: '·'; position: absolute; left: 0; top: -.1rem;
+      color: var(--emerald-glow); font-weight: 700; font-size: 1.3rem; line-height: 1;
+    }
+
+    /* INTÉRÊTS */
+    #intérêts { background: var(--ink); }
+    .interests-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .interest-cell {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--line); transition: background .4s;
+    }
+    .interest-cell:last-child { border-right: none; }
+    .interest-cell:hover { background: rgba(45, 212, 165, .03); }
+    .interest-marker {
+      font-family: var(--serif); font-style: italic;
+      font-size: 2rem; color: var(--gold-lt); margin-bottom: 1rem; line-height: 1;
+    }
+    .interest-title {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 500;
+      color: var(--ivory); margin-bottom: 1.25rem;
+    }
+    .interest-items { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .interest-items li {
+      font-size: .88rem; color: var(--ivory-dim);
+      font-weight: 300; line-height: 1.5;
+    }
+    .interest-items li::before { content: '— '; color: var(--emerald-glow); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink-2);
+      border-top: 1px solid var(--line-bright);
+      position: relative; overflow: hidden;
+    }
     footer::before {
-      content:'CONTACT'; position:absolute; font-family:var(--serif); font-size:12rem; font-weight:900;
-      color:rgba(200,164,94,.02); top:50%; left:50%; transform:translate(-50%,-50%); white-space:nowrap; pointer-events:none;
+      content: 'fin'; position: absolute;
+      font-family: var(--serif); font-style: italic;
+      font-size: 28rem; font-weight: 400;
+      color: rgba(212, 175, 106, .025);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none; line-height: .85; letter-spacing: -.05em;
     }
-    .footer-inner { max-width:900px; margin:0 auto; padding:5.5rem 2.5rem; text-align:center; position:relative; z-index:1; }
-    .footer-title    { font-size:clamp(1.6rem,3.5vw,2.6rem); font-weight:700; color:var(--white); margin-bottom:1rem; }
-    .footer-subtitle { font-size:.88rem; font-weight:300; color:var(--slate-dim); margin-bottom:2.5rem; }
-
-    .contact-row { display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; margin-bottom:3rem; }
-    .contact-item { display:flex; align-items:center; gap:.6rem; font-size:.85rem; color:var(--slate-mid); text-decoration:none; transition:color .25s; }
-    .contact-item:hover { color:var(--gold-lt); }
-    .contact-item svg { width:16px; height:16px; opacity:.6; }
-
-    .social-row { display:flex; justify-content:center; gap:1rem; margin-bottom:3.5rem; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto; padding: 7rem 3rem;
+      text-align: center; position: relative; z-index: 1;
+    }
+    .footer-label {
+      font-size: .62rem; font-weight: 600; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .footer-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 500; color: var(--ivory);
+      line-height: .95; margin-bottom: 2rem; letter-spacing: -.02em;
+    }
+    .footer-title em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+    .footer-deck {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.25rem; color: var(--ivory-mid);
+      margin-bottom: 3.5rem; max-width: 50ch;
+      margin-left: auto; margin-right: auto; line-height: 1.5;
+    }
+    .contact-rule { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 3rem; }
+    .contact-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .9rem; color: var(--ivory-dim);
+      text-decoration: none; transition: color .3s; font-weight: 400;
+    }
+    .contact-item:hover { color: var(--gold-lt); }
+    .contact-item svg { width: 17px; height: 17px; opacity: .55; }
+    .social-row {
+      display: flex; justify-content: center; gap: 1rem;
+      margin-bottom: 4rem; flex-wrap: wrap;
+    }
     .social-btn {
-      display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.4rem;
-      border:1px solid rgba(255,255,255,.08); border-radius:2px;
-      font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
-      color:var(--slate-mid); text-decoration:none; transition:border-color .25s, color .25s, background .25s;
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .85rem 1.75rem;
+      border: 1px solid var(--line-bright); border-radius: 1px;
+      font-size: .65rem; font-weight: 600; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--ivory-dim);
+      text-decoration: none; transition: all .35s;
     }
-    .social-btn:hover { border-color:rgba(200,164,94,.35); color:var(--gold-lt); background:rgba(200,164,94,.04); }
-    .social-btn svg { width:15px; height:15px; }
-    .footer-copy { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.12); }
+    .social-btn:hover {
+      border-color: var(--gold); color: var(--gold-lt);
+      background: rgba(212, 175, 106, .04); transform: translateY(-2px);
+    }
+    .social-btn svg { width: 14px; height: 14px; }
+    .footer-copy {
+      font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--ivory-low); opacity: .5;
+    }
+    .footer-copy::before, .footer-copy::after {
+      content: '◆'; margin: 0 1rem; color: var(--gold); opacity: .5;
+    }
 
-    /* ══════════════════ RESPONSIVE ══════════════════ */
-    @media (max-width:900px) {
-      .hero-content  { grid-template-columns:1fr; gap:3rem; padding-top:6rem; }
-      .photo-card    { width:240px; margin:0 auto; }
-      .hero-split    { clip-path:none; opacity:.4; }
-      .about-grid    { grid-template-columns:1fr; }
-      .projects-grid { grid-template-columns:1fr; }
-      .edu-grid      { grid-template-columns:1fr; }
-      .comp-grid     { grid-template-columns:1fr; }
-      .exp-item      { grid-template-columns:1fr; }
-      .exp-date-col  { text-align:left; margin-bottom:.5rem; }
-      .exp-line-col  { display:none; }
-      nav a.nav-link { display:none; }
-      .orbital-wrap  { opacity:.05; right:-10%; }
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-right { height: 500px; max-width: 500px; margin: 0 auto; width: 100%; }
+      .about-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .about-sidebar { position: static; }
+    }
+    @media (max-width: 800px) {
+      .mag-header-inner { grid-template-columns: 1fr; gap: .5rem; padding: 0 1.5rem; }
+      .mag-issue, .mag-nav { display: none; }
+      .mag-logo { text-align: center; }
+      .section-inner { padding: 5rem 1.5rem; }
+      .mag-section-header { grid-template-columns: 1fr; gap: 1rem; }
+      .mag-section-num { font-size: 4rem; }
+      .hero-wrap { padding: 6rem 1.5rem 3rem; }
+      .hero-title .l2 { padding-left: 1rem; }
+      .proj-row, .proj-row.alt { grid-template-columns: 1fr; gap: 1.5rem; }
+      .proj-row.alt .proj-meta-col, .proj-row.alt .proj-content-col { order: initial; }
+      .proj-num { font-size: 3rem; }
+      .exp-block { grid-template-columns: 1fr; gap: 1.5rem; }
+      .edu-grid, .interests-strip { grid-template-columns: 1fr; }
+      .edu-card, .interest-cell { border-right: none; }
+      .comp-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .comp-col:nth-child(2n) { border-right: none; }
+      .comp-col:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .hero-visual { grid-template-columns: 1fr; grid-template-rows: 300px auto auto; }
+      .hero-photo-main { grid-row: 1; grid-column: 1; min-height: 300px; }
+      .hero-card-stat { grid-row: 2; grid-column: 1; }
+      .hero-card-meta { grid-row: 3; grid-column: 1; }
+      .hero-scroll { display: none; }
+    }
+    @media (max-width: 500px) {
+      .comp-grid-4 { grid-template-columns: 1fr; }
+      .comp-col { border-right: none; border-bottom: 1px solid var(--line); }
+      .comp-col:last-child { border-bottom: none; }
+      .hero-byline { gap: 1rem; }
+      .hero-byline-sep { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ HEADER ═══ -->
-  <header id="site-header">
-    <div class="header-inner">
-      <div class="logo-mark">
-        <span class="logo-name">Arsène Mamy</span>
-        <span class="logo-sub">Business Dev · E-commerce · Commerce</span>
-      </div>
-      <nav>
-        <a href="#hero"       class="nav-link">Accueil</a>
-        <a href="#about"      class="nav-link">À propos</a>
-        <a href="#experience" class="nav-link">Parcours</a>
-        <a href="#projets"    class="nav-link">Projets</a>
-        <div class="nav-icons">
-          <a href="mailto:arsenemamy2004@gmail.com" title="Email">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          </a>
-        </div>
+  <!-- HEADER -->
+  <header class="mag-header">
+    <div class="mag-header-inner">
+      <div class="mag-issue">Édition №01 <span>2026</span></div>
+      <div class="mag-logo">ARSÈNE <em>MAMY</em></div>
+      <nav class="mag-nav">
+        <a href="#about">Profil</a>
+        <a href="#projets">Œuvres</a>
+        <a href="#experience">Parcours</a>
+        <a href="mailto:arsenemamy2004@gmail.com">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- ═══ HERO ═══ -->
+  <!-- HERO -->
   <section id="hero" class="noise">
-    <div class="hero-split"></div>
-    <div class="hero-grid"></div>
-    <div class="orbital-wrap">
-      <div class="orbital-ring"></div>
-      <div class="orbital-ring"></div>
-      <div class="orbital-ring"></div>
-      <div class="orbital-dot"></div>
-      <div class="orbital-dot"></div>
-    </div>
-    <div class="hero-content">
-      <div class="photo-card" style="animation:fadeUp .9s ease both .2s">
-        <div class="photo-frame">
-          <!-- Remplace "ARSENE.png" par ta photo -->
-          <div class="photo-placeholder">
-            <span class="initials">AM</span>
-            <span class="ph-label">Ajouter photo</span>
+    <div class="hero-bg"></div>
+    <div class="hero-rule-top"></div>
+    <div class="hero-issue-num">01</div>
+    <div class="hero-rule-bot"></div>
+
+    <div class="hero-wrap">
+      <div class="hero-left">
+        <div class="hero-kicker">
+          <span class="hero-kicker-line"></span>
+          <span class="hero-kicker-text">Featured · Édition 2026</span>
+        </div>
+
+        <p class="hero-feature">— Le portrait du mois —</p>
+
+        <h1 class="hero-title">
+          <span class="l1">Arsène</span>
+          <span class="l2">Mamy.</span>
+        </h1>
+
+        <p class="hero-deck">
+          Étudiant en Master Ingénieur d'Affaires — à la croisée du commerce, du digital et de la data, animé par l'esprit de conquête.
+        </p>
+
+        <div class="hero-byline">
+          <div class="hero-byline-block">
+            <strong>Statut</strong>
+            Master Ingé. d'Affaires
+          </div>
+          <div class="hero-byline-sep"></div>
+          <div class="hero-byline-block">
+            <strong>Disponibilité</strong>
+            Alternance · 3j / 2j
+          </div>
+          <div class="hero-byline-sep"></div>
+          <div class="hero-byline-block">
+            <strong>Bureau</strong>
+            Orléans · Paris
           </div>
         </div>
-        <div class="photo-stripe"></div>
-        <div class="photo-badge">Recherche Alternance<span>2026 · 3j/2j</span></div>
       </div>
-      <div style="animation:fadeUp .9s ease both .45s">
-        <div class="hero-eyebrow"><span class="dot"></span>Business Development · E-commerce · Commerce</div>
-        <h1 class="hero-h1">ARSÈNE<br><em>MAMY</em></h1>
-        <p class="hero-sub">Étudiant en Master Ingénieur d'Affaires avec plus de <strong>2 ans d'expérience commerciale terrain</strong> et en e-commerce multi-canaux.</p>
-        <p class="hero-tagline">Licence Économie & Gestion – Univ. d'Orléans &nbsp;·&nbsp; Futur Master IA Paris Panthéon-Assas / EFREI (2026)</p>
-        <div class="hero-stats">
-          <div class="stat-item"><div class="stat-num">2 ans</div><div class="stat-lbl">Expérience commerciale</div></div>
-          <div class="stat-item"><div class="stat-num">3+</div><div class="stat-lbl">Canaux de vente</div></div>
-          <div class="stat-item"><div class="stat-num">2022</div><div class="stat-lbl">E-commerce lancé</div></div>
-        </div>
-        <div class="hero-ctas">
-          <a href="mailto:arsenemamy2004@gmail.com" class="btn-primary">
-            Me contacter
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#about" class="btn-ghost">En savoir plus</a>
+
+      <div class="hero-right">
+        <div class="hero-visual">
+
+          <div class="hero-card-stat">
+            <div class="stat-mini-label">L'expérience</div>
+            <div class="stat-mini-num">2+ ans</div>
+            <div class="stat-mini-desc">d'expérience commerciale terrain et en e-commerce multi-canaux.</div>
+          </div>
+
+          <div class="hero-card-meta">
+            <div class="hero-card-meta-label">Mission</div>
+            <div class="hero-card-meta-text">
+              Conquérir, négocier, <em>construire des comptes</em>.
+            </div>
+          </div>
+
+          <div class="hero-photo-main">
+            <img src="photo_mamy.jpg" alt="Arsène Mamy"
+                 onerror="this.onerror=null; this.src='photo_mamy.png';" />
+            <span class="hero-photo-corner-br"></span>
+          </div>
+
         </div>
       </div>
     </div>
-    <div class="scroll-hint"><p>Scroll</p><div class="line"></div></div>
+
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <p>Tournez la page</p>
+    </div>
   </section>
 
-  <!-- ═══ ABOUT ═══ -->
+  <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
-      <div class="section-header reveal">
-        <p class="label">À propos</p>
-        <span class="gold-line"></span>
-        <h2>Profil &amp; Compétences</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text reveal-left">
-          <p><strong>Étudiant en Master Ingénieur d'Affaires</strong> (Paris Panthéon-Assas / EFREI), je combine une solide formation en ingénierie commerciale avec plus de 2 ans d'expérience terrain dans la relation client et le commerce multi-canaux.</p>
-          <p>Mon profil s'articule autour de deux axes complémentaires : le <strong>développement commercial B2B/B2C</strong> (prospection, négociation, closing, gestion de portefeuille clients) et l'<strong>entrepreneuriat e-commerce</strong> (dropshipping, acquisition organique et payante, pilotage analytique via Python et Excel). Mes expériences chez LIDL et Castorama, couplées à mon activité indépendante lancée en 2022, m'ont forgé un vrai sens du résultat et une grande autonomie.</p>
-          <div class="quote">Fort esprit de conquête, rigueur analytique et culture du résultat — je recherche une alternance en Business Development à partir de 2026 (3j entreprise / 2j école).</div>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 01</div>
+        <div class="mag-section-title">
+          <p class="label">Profil &amp; Compétences</p>
+          <h2>Le portrait <em>en grand format</em></h2>
+          <p class="deck">Un profil hybride entre terrain commercial, e-commerce entrepreneurial et rigueur analytique — au service du développement business.</p>
         </div>
-        <div class="skills-panel reveal-right">
-          <div class="skills-group">
-            <div class="skills-group-label">Compétences métier</div>
+      </header>
+
+      <div class="about-wrap">
+        <div class="reveal">
+          <p class="about-lead">
+            Étudiant en Master Ingénieur d'Affaires — Paris Panthéon-Assas / EFREI.
+          </p>
+          <div class="about-body">
+            <p>
+              Plus de <strong>2 ans d'expérience commerciale terrain</strong> et en <strong>e-commerce multi-canaux</strong> (LIDL, Castorama, activité indépendante depuis 2022). Création et développement de plusieurs activités de vente en ligne (dropshipping, revente, services), avec acquisition clients via Instagram, TikTok, Facebook et marketplaces.
+            </p>
+            <p>
+              Fort <strong>esprit de conquête</strong>, <strong>rigueur analytique</strong> (Excel, Python, CRM) et vraie culture du résultat. Recherche une alternance en <strong>Business Development</strong> ou développement commercial à partir de 2026 (3 jours entreprise / 2 jours école).
+            </p>
+          </div>
+        </div>
+
+        <aside class="about-sidebar reveal">
+          <h3 class="sidebar-title">L'arsenal</h3>
+
+          <div class="sidebar-block">
+            <div class="sidebar-block-label">Compétences métier</div>
             <div class="tag-group">
-              <span class="tag tag-finance">Développement commercial</span>
-              <span class="tag tag-finance">Prospection B2B/B2C</span>
-              <span class="tag tag-finance">Négociation & closing</span>
-              <span class="tag tag-finance">Gestion portefeuille clients</span>
-              <span class="tag tag-finance">E-commerce & digital</span>
+              <span class="tag tag-gold">Développement commercial</span>
+              <span class="tag tag-gold">Prospection B2B / B2C</span>
+              <span class="tag tag-gold">Négociation &amp; closing</span>
+              <span class="tag tag-gold">Gestion portefeuille</span>
+              <span class="tag tag-gold">E-commerce &amp; digital</span>
             </div>
           </div>
-          <div class="skills-group">
-            <div class="skills-group-label">Stack technique</div>
+
+          <div class="sidebar-block">
+            <div class="sidebar-block-label">Outils &amp; logiciels</div>
             <div class="tag-group">
-              <span class="tag tag-tech">Python</span>
-              <span class="tag tag-tech">Excel</span>
-              <span class="tag tag-tech">SQL</span>
-              <span class="tag tag-tech">CRM (Jupiter)</span>
-              <span class="tag tag-tech">Google Analytics</span>
-              <span class="tag tag-tech">PowerPoint</span>
-              <span class="tag tag-tech">Réseaux sociaux & Ads</span>
+              <span class="tag tag-emerald">Python</span>
+              <span class="tag tag-emerald">Excel</span>
+              <span class="tag tag-emerald">SQL</span>
+              <span class="tag tag-emerald">CRM Jupiter</span>
+              <span class="tag tag-emerald">Google Analytics</span>
+              <span class="tag tag-emerald">PowerPoint</span>
             </div>
           </div>
-          <div class="skills-group">
-            <div class="skills-group-label">Langues</div>
+
+          <div class="sidebar-block">
+            <div class="sidebar-block-label">Langues</div>
             <div class="lang-row"><span class="lang-name">Français</span><span class="lang-level">Courant</span></div>
             <div class="lang-row"><span class="lang-name">Anglais</span><span class="lang-level">Opérationnel</span></div>
           </div>
-        </div>
+        </aside>
+      </div>
+
+      <div class="about-pullquote reveal">
+        <p>Conquérir, négocier, construire des comptes — avec la rigueur de la data et l'énergie du terrain.</p>
+        <span class="attr">— Manifeste personnel</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══ PROJECTS ═══ -->
+  <!-- PROJETS -->
   <section id="projets">
     <div class="section-inner">
-      <div class="section-header reveal">
-        <p class="label">Projets &amp; Réalisations</p>
-        <span class="gold-line"></span>
-        <h2>Travaux &amp; initiatives</h2>
-      </div>
-      <div class="projects-grid">
-
-        <div class="proj-card reveal" style="transition-delay:.05s">
-          <div class="proj-header"><span class="proj-number">01</span><span class="proj-badge badge-blue">E-commerce</span></div>
-          <h3 class="proj-title">Boutique E-commerce – Gestion &amp; Croissance Multi-Canaux</h3>
-          <p class="proj-desc">Lancement et gestion de boutiques en ligne (dropshipping, revente) avec acquisition organique et payante via Instagram, TikTok, Facebook et marketplaces. Suivi analytique des performances (CA, marges, taux de conversion) et optimisation continue des offres.</p>
-          <div class="proj-tags"><span class="tag tag-finance">Dropshipping</span><span class="tag tag-tech">Social Ads</span><span class="tag tag-other">SAV & Fidélisation</span></div>
-          <a href="#" class="proj-link">Consulter le projet <span>→</span></a>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 02</div>
+        <div class="mag-section-title">
+          <p class="label">Projets &amp; Réalisations</p>
+          <h2>Le portfolio, <em>page après page</em></h2>
+          <p class="deck">Des travaux qui racontent une trajectoire — entre développement commercial entrepreneurial et rigueur analytique.</p>
         </div>
+      </header>
 
-        <div class="proj-card reveal" style="transition-delay:.15s">
-          <div class="proj-header"><span class="proj-number">02</span><span class="proj-badge badge-green">Python / Excel</span></div>
-          <h3 class="proj-title">Analyse Commerciale &amp; Reporting — Automatisation &amp; Visualisation</h3>
-          <p class="proj-desc">Production d'analyses chiffrées (régressions, bilans, ratios financiers) dans le cadre de la Licence Économie et Gestion. Utilisation de Python pour automatiser le traitement de données et produire des reportings visuels. Restitution en PowerPoint pour un public non technique.</p>
-          <div class="proj-tags"><span class="tag tag-tech">Python</span><span class="tag tag-tech">Excel</span><span class="tag tag-other">KPI & Reporting</span></div>
-          <a href="#" class="proj-link">Consulter le projet <span>→</span></a>
-        </div>
+      <div class="projects-edit">
 
-        <div class="proj-card reveal" style="transition-delay:.25s">
-          <div class="proj-header"><span class="proj-number">03</span><span class="proj-badge badge-violet">CRM & Vente</span></div>
-          <h3 class="proj-title">Développement Commercial Terrain — Argumentation &amp; Closing</h3>
-          <p class="proj-desc">Expérience en vente conseil chez Castorama sur des produits techniques à forte valeur ajoutée : identification des besoins, argumentation, closing et fidélisation. Gestion des réclamations avec diplomatie. Contribution mesurée aux objectifs de vente par rayon.</p>
-          <div class="proj-tags"><span class="tag tag-finance">Vente conseil</span><span class="tag tag-tech">CRM</span><span class="tag tag-other">Closing</span></div>
-          <a href="#" class="proj-link">Consulter le projet <span>→</span></a>
-        </div>
+        <article class="proj-row reveal">
+          <div class="proj-num">01</div>
+          <div class="proj-meta-col">
+            <span class="proj-cat">E-commerce multi-canaux</span>
+            <p class="proj-date">Depuis 2022 · Activité indépendante</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Instagram</span>
+              <span class="proj-tag">TikTok</span>
+              <span class="proj-tag">Facebook</span>
+              <span class="proj-tag">Marketplaces</span>
+            </div>
+          </div>
+          <div class="proj-content-col">
+            <h3 class="proj-title">Boutique E-commerce — <em>Gestion &amp; Croissance Multi-Canaux</em></h3>
+            <p class="proj-desc">
+              Lancement et gestion de boutiques en ligne (<strong>dropshipping, revente</strong>) avec acquisition organique et payante via les réseaux sociaux. Suivi analytique des performances (<strong>CA, marges, taux de conversion</strong>) et optimisation continue des offres. Gestion complète du cycle client : prospection, closing, SAV, fidélisation et gestion des litiges fournisseurs.
+            </p>
+          </div>
+        </article>
+
+        <article class="proj-row alt reveal">
+          <div class="proj-num">02</div>
+          <div class="proj-content-col">
+            <h3 class="proj-title">Analyse Commerciale &amp; <em>Reporting</em></h3>
+            <p class="proj-desc">
+              Production d'<strong>analyses chiffrées</strong> (régressions, bilans, ratios financiers) dans le cadre de la Licence Économie et Gestion. Utilisation de <strong>Python</strong> pour automatiser le traitement de données commerciales et produire des reportings visuels. Conception de présentations <strong>PowerPoint</strong> structurées pour restituer des analyses de performance à un public non technique.
+            </p>
+          </div>
+          <div class="proj-meta-col">
+            <span class="proj-cat">Data &amp; Reporting</span>
+            <p class="proj-date">Projet académique, 2024 — 2025</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Excel</span>
+              <span class="proj-tag">Python · pandas</span>
+              <span class="proj-tag">PowerPoint</span>
+            </div>
+          </div>
+        </article>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══ EXPERIENCE ═══ -->
+  <!-- EXPÉRIENCE -->
   <section id="experience">
     <div class="section-inner">
-      <div class="section-header reveal">
-        <p class="label">Expériences Professionnelles</p>
-        <span class="gold-line"></span>
-        <h2>Parcours commercial</h2>
-      </div>
-      <div class="exp-timeline">
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 03</div>
+        <div class="mag-section-title">
+          <p class="label">Expériences professionnelles</p>
+          <h2>Trois terrains, <em>une école de la vente</em></h2>
+          <p class="deck">De la grande distribution française au e-commerce multi-canaux entrepreneurial — un parcours qui forge le sens du résultat.</p>
+        </div>
+      </header>
 
-        <!-- LIDL -->
-        <div class="exp-item">
-          <div class="exp-date-col reveal-left">
-            <div class="exp-period">Août 2025<br>Présent</div>
+      <div class="exp-list">
+
+        <div class="exp-block reveal">
+          <div class="exp-meta">
+            <div class="exp-period">Août 2025 — Présent</div>
             <div class="exp-location">Orléans, France</div>
           </div>
-          <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vert"></div></div>
-          <div class="exp-body reveal-right">
-            <div class="exp-role">Équipier Polyvalent – Relation Client &amp; Satisfaction</div>
-            <div class="exp-company">LIDL – Orléans</div>
-            <div class="exp-card-inner">
-              <ul class="exp-ul">
-                <li>Accueil de qualité et expérience client optimale en point de vente ; gestion des flux produits et disponibilité des articles en rayon.</li>
-                <li>Encaissement fiable et gestion des files d'attente en période de forte affluence.</li>
-                <li>Travail en équipe dans un environnement exigeant avec des objectifs quotidiens de performance.</li>
-                <li>Développement de la résilience et de l'adaptabilité face aux pics d'activité et aux situations imprévues.</li>
-              </ul>
-            </div>
+          <div class="exp-content">
+            <h3 class="exp-role">Équipier Polyvalent — <em>Relation Client &amp; Satisfaction</em></h3>
+            <div class="exp-company">LIDL · Orléans</div>
+            <ul class="exp-points">
+              <li>Accueil de qualité et expérience client optimale en point de vente ; gestion des flux produits et disponibilité des articles en rayon.</li>
+              <li>Encaissement fiable et gestion des files d'attente en période de forte affluence.</li>
+              <li>Travail en équipe dans un environnement exigeant avec des objectifs quotidiens de performance.</li>
+              <li>Développement de la résilience et de l'adaptabilité face aux pics d'activité et aux situations imprévues.</li>
+            </ul>
           </div>
         </div>
 
-        <!-- Castorama -->
-        <div class="exp-item">
-          <div class="exp-date-col reveal-left">
+        <div class="exp-block reveal">
+          <div class="exp-meta">
             <div class="exp-period">2025</div>
             <div class="exp-location">Orléans, France</div>
           </div>
-          <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vert"></div></div>
-          <div class="exp-body reveal-right">
-            <div class="exp-role">Conseiller Vendeur – Contact Client &amp; Développement des Ventes</div>
-            <div class="exp-company">Castorama – Orléans</div>
-            <div class="exp-card-inner">
-              <ul class="exp-ul">
-                <li>Accueil, conseil et accompagnement personnalisé des clients en surface de vente ; identification des besoins et proposition de solutions adaptées (vente conseil).</li>
-                <li>Argumentation commerciale et closing sur des produits techniques à forte valeur ajoutée.</li>
-                <li>Contribution à l'atteinte des objectifs de vente par rayon et fidélisation de la clientèle.</li>
-                <li>Gestion des réclamations et traitement des retours clients avec diplomatie et efficacité.</li>
-              </ul>
-            </div>
+          <div class="exp-content">
+            <h3 class="exp-role">Conseiller Vendeur — <em>Contact Client &amp; Développement des Ventes</em></h3>
+            <div class="exp-company">Castorama · Orléans</div>
+            <ul class="exp-points">
+              <li>Accueil, conseil et accompagnement personnalisé des clients en surface de vente ; identification des besoins et proposition de solutions adaptées (vente conseil).</li>
+              <li>Contribution à l'atteinte des objectifs de vente par rayon et fidélisation de la clientèle.</li>
+              <li>Gestion des réclamations et traitement des retours clients avec diplomatie et efficacité.</li>
+              <li>Argumentation commerciale et closing sur des produits techniques à forte valeur ajoutée.</li>
+            </ul>
           </div>
         </div>
 
-        <!-- E-commerce -->
-        <div class="exp-item">
-          <div class="exp-date-col reveal-left">
+        <div class="exp-block reveal">
+          <div class="exp-meta">
             <div class="exp-period">Depuis 2022</div>
-            <div class="exp-location">France</div>
+            <div class="exp-location">Activité indépendante, France</div>
           </div>
-          <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vert"></div></div>
-          <div class="exp-body reveal-right">
-            <div class="exp-role">Entrepreneur E-commerce – Développement Commercial Multi-Canaux</div>
+          <div class="exp-content">
+            <h3 class="exp-role">Entrepreneur E-commerce — <em>Développement Commercial Multi-Canaux</em></h3>
             <div class="exp-company">Activité indépendante</div>
-            <div class="exp-card-inner">
-              <ul class="exp-ul">
-                <li>Création et développement de plusieurs activités de vente en ligne (dropshipping, revente, services) ; prospection et acquisition clients via Instagram, TikTok, Facebook et marketplaces.</li>
-                <li>Gestion de la relation client de A à Z : prise de commande, suivi, SAV et fidélisation.</li>
-                <li>Pilotage des performances commerciales : suivi du CA, des marges et optimisation des offres selon les résultats.</li>
-                <li>Négociation avec les fournisseurs et gestion logistique des expéditions.</li>
-              </ul>
-            </div>
+            <ul class="exp-points">
+              <li>Création et développement de plusieurs activités de vente en ligne (dropshipping, revente, services) ; prospection et acquisition clients via Instagram, TikTok, Facebook et marketplaces.</li>
+              <li>Gestion de la relation client de A à Z : prise de commande, suivi, SAV et fidélisation.</li>
+              <li>Pilotage des performances commerciales : suivi du CA, des marges et optimisation des offres selon les résultats.</li>
+              <li>Négociation avec les fournisseurs et gestion logistique des expéditions.</li>
+            </ul>
           </div>
         </div>
 
@@ -706,108 +985,200 @@
     </div>
   </section>
 
-  <!-- ═══ FORMATION ═══ -->
+  <!-- FORMATION -->
   <section id="formation">
     <div class="section-inner">
-      <div class="section-header reveal">
-        <p class="label">Formation</p>
-        <span class="gold-line"></span>
-        <h2>Parcours académique</h2>
-      </div>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 04</div>
+        <div class="mag-section-title">
+          <p class="label">Formation</p>
+          <h2>Le parcours <em>académique</em></h2>
+          <p class="deck">Deux établissements, deux approches complémentaires — l'analyse économique en socle, l'ingénierie d'affaires en spécialisation.</p>
+        </div>
+      </header>
+
       <div class="edu-grid">
-        <div class="edu-card reveal" data-num="01" style="transition-delay:.05s">
+
+        <article class="edu-card reveal">
+          <div class="edu-num">i.</div>
           <div class="edu-year">2026 · Prévu</div>
-          <div class="edu-degree">Master Ingénieur d'Affaires (Tech)</div>
-          <div class="edu-school">Paris Panthéon-Assas / EFREI, Paris</div>
-          <div class="edu-desc">Ingénierie commerciale · Négociation B2B complexe · Stratégie grands comptes · CRM · Marketing stratégique · Business intelligence · Conduite du changement</div>
-        </div>
-        <div class="edu-card reveal" data-num="02" style="transition-delay:.15s">
+          <h3 class="edu-degree">Master Ingénieur d'Affaires (Tech)</h3>
+          <p class="edu-school">Paris Panthéon-Assas / EFREI</p>
+          <p class="edu-desc">
+            Ingénierie commerciale · Négociation B2B complexe · Stratégie grands comptes · CRM · Marketing stratégique · Business intelligence · Conduite du changement.
+          </p>
+        </article>
+
+        <article class="edu-card reveal">
+          <div class="edu-num">ii.</div>
           <div class="edu-year">Depuis 2023</div>
-          <div class="edu-degree">Licence 3 Économie et Gestion</div>
-          <div class="edu-school">Université d'Orléans, France</div>
-          <div class="edu-desc">Analyse statistique et financière (régressions, bilans, ratios) · Excel et Python pour analyses chiffrées · Microéconomie · Macroéconomie</div>
-        </div>
+          <h3 class="edu-degree">Licence 3 Économie et Gestion</h3>
+          <p class="edu-school">Université d'Orléans</p>
+          <p class="edu-desc">
+            Analyse statistique et financière (régressions, bilans, ratios) · Excel et Python pour analyses chiffrées.
+          </p>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- ═══ SKILLS & CERTIF ══════════════════ -->
+  <!-- COMPÉTENCES -->
   <section id="competences">
     <div class="section-inner">
-      <div class="section-header reveal">
-        <p class="label">Compétences &amp; Intérêts</p>
-        <span class="gold-line"></span>
-        <h2>Soft skills &amp; Outils</h2>
-      </div>
-      <div class="comp-grid">
-        <div class="reveal-left">
-          <p class="label" style="color:var(--gold);margin-bottom:1.25rem;">Soft skills</p>
-          <div class="soft-grid">
-            <div class="soft-item"><span class="soft-icon">🎯</span><span class="soft-label">Esprit de compétition</span></div>
-            <div class="soft-item"><span class="soft-icon">⚡</span><span class="soft-label">Résilience &amp; autonomie</span></div>
-            <div class="soft-item"><span class="soft-icon">💬</span><span class="soft-label">Communication</span></div>
-            <div class="soft-item"><span class="soft-icon">💡</span><span class="soft-label">Force de proposition</span></div>
-            <div class="soft-item"><span class="soft-icon">👥</span><span class="soft-label">Sens du service client</span></div>
-            <div class="soft-item"><span class="soft-icon">🤝</span><span class="soft-label">Travail en équipe</span></div>
-          </div>
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 05</div>
+        <div class="mag-section-title">
+          <p class="label">Compétences</p>
+          <h2>L'inventaire <em>du studio</em></h2>
+          <p class="deck">Quatre familles de savoir-faire qui dessinent un profil hybride business developer / data.</p>
         </div>
-        <div class="reveal-right">
-          <p class="label" style="color:var(--gold);margin-bottom:1.25rem;">Outils &amp; Centres d'intérêt</p>
-          <div class="certif-list">
-            <div class="certif-item"><div style="width:100%"><div class="certif-name">Python · Excel · SQL</div><div class="certif-sub">Analyse de données &amp; automatisation</div></div></div>
-            <div class="certif-item"><div style="width:100%"><div class="certif-name">CRM Jupiter · Google Analytics</div><div class="certif-sub">Suivi client &amp; performance commerciale</div></div></div>
-            <div class="certif-item"><div style="width:100%"><div class="certif-name">Réseaux sociaux &amp; Ads</div><div class="certif-sub">Instagram · TikTok · Facebook · Marketplaces</div></div></div>
-            <div class="certif-item highlight"><div style="width:100%"><div class="certif-name">Sport · Musculation · Business &amp; Podcasts</div><div class="certif-sub">Développement personnel · Veille marché</div></div></div>
-          </div>
+      </header>
+
+      <div class="comp-grid-4">
+
+        <div class="comp-col reveal">
+          <div class="comp-col-num">i.</div>
+          <h3 class="comp-col-title">Compétences métier</h3>
+          <ul class="comp-list">
+            <li>Développement commercial</li>
+            <li>Prospection B2B / B2C</li>
+            <li>Négociation &amp; closing</li>
+            <li>Gestion portefeuille clients</li>
+            <li>E-commerce &amp; digital</li>
+          </ul>
+        </div>
+
+        <div class="comp-col reveal">
+          <div class="comp-col-num">ii.</div>
+          <h3 class="comp-col-title">Soft skills</h3>
+          <ul class="comp-list">
+            <li>Résilience &amp; autonomie</li>
+            <li>Esprit de compétition</li>
+            <li>Communication</li>
+            <li>Force de proposition</li>
+            <li>Sens du service client</li>
+          </ul>
+        </div>
+
+        <div class="comp-col reveal">
+          <div class="comp-col-num">iii.</div>
+          <h3 class="comp-col-title">Outils &amp; logiciels</h3>
+          <ul class="comp-list">
+            <li>Python, Excel, SQL</li>
+            <li>CRM (Jupiter)</li>
+            <li>Google Analytics, KPI</li>
+            <li>PowerPoint, Pack Office</li>
+            <li>Réseaux sociaux &amp; ads</li>
+          </ul>
+        </div>
+
+        <div class="comp-col reveal">
+          <div class="comp-col-num">iv.</div>
+          <h3 class="comp-col-title">Langues</h3>
+          <ul class="comp-list">
+            <li>Français — Courant</li>
+            <li>Anglais — Opérationnel</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTÉRÊTS -->
+  <section id="intérêts">
+    <div class="section-inner">
+      <header class="mag-section-header reveal">
+        <div class="mag-section-num">№ 06</div>
+        <div class="mag-section-title">
+          <p class="label">Centres d'intérêt</p>
+          <h2>Hors <em>du bureau</em></h2>
+        </div>
+      </header>
+
+      <div class="interests-strip">
+        <div class="interest-cell reveal">
+          <div class="interest-marker">◆</div>
+          <h3 class="interest-title">Sport</h3>
+          <ul class="interest-items">
+            <li>Musculation</li>
+            <li>Discipline &amp; régularité</li>
+          </ul>
+        </div>
+        <div class="interest-cell reveal">
+          <div class="interest-marker">✦</div>
+          <h3 class="interest-title">Business</h3>
+          <ul class="interest-items">
+            <li>Podcasts business</li>
+            <li>Stratégies commerciales</li>
+            <li>Études de cas SaaS &amp; D2C</li>
+          </ul>
+        </div>
+        <div class="interest-cell reveal">
+          <div class="interest-marker">❋</div>
+          <h3 class="interest-title">Développement personnel</h3>
+          <ul class="interest-items">
+            <li>Lectures &amp; veille</li>
+            <li>Productivité &amp; mindset</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner reveal">
-      <h2 class="footer-title">Prenons contact</h2>
-      <p class="footer-subtitle">Disponible pour une alternance à partir de 2026 — 3j entreprise / 2j école</p>
+      <p class="footer-label">Dernière page</p>
+      <h2 class="footer-title">Une alternance,<br><em>un portefeuille</em><br>à construire.</h2>
+      <p class="footer-deck">
+        Disponible pour une alternance en Business Development à partir de 2026 — 3 jours entreprise / 2 jours école.
+      </p>
+
+      <div class="contact-rule"></div>
+
       <div class="contact-row">
         <a href="mailto:arsenemamy2004@gmail.com" class="contact-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
           arsenemamy2004@gmail.com
         </a>
         <a href="tel:+33757171296" class="contact-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
           07 57 17 12 96
         </a>
         <span class="contact-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          Orléans / Paris
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Orléans · Paris
         </span>
       </div>
+
       <div class="social-row">
-        <a href="#" class="social-btn">
+        <a href="https://www.linkedin.com/in/ouo-arsene" target="_blank" rel="noopener" class="social-btn">
           <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           LinkedIn
         </a>
-        <a href="#projets" class="social-btn">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-          Portfolio
+        <a href="mailto:arsenemamy2004@gmail.com" class="social-btn">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Écrire
         </a>
       </div>
-      <p class="footer-copy">© 2025 Arsène Mamy · Étudiant Master Ingénieur d'Affaires – Business Development</p>
+
+      <p class="footer-copy">© 2026 Arsène Mamy — Édition №01 · Business Developer</p>
     </div>
   </footer>
 
   <script>
-    /* HEADER */
-    const hdr = document.getElementById('site-header');
-    window.addEventListener('scroll',()=>{ hdr.classList.toggle('scrolled', window.scrollY>30); });
-
-    /* REVEAL */
-    const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
-    const io  = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-    },{ threshold:.08 });
-    els.forEach(el=>io.observe(el));
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .1 });
+    els.forEach(el => io.observe(el));
   </script>
 </body>
 </html>
